@@ -1,0 +1,167 @@
+*{
+    /* margin: 0;
+    padding: 0; */
+    border:none;
+    box-sizing: border-box;
+}
+html {
+    --gray800: oklch(10% 0% 0);
+    --gray600: oklch(40% 0% 0);
+    --gray100: oklch(92% 0% 0);
+    --brand: oklch(85% 0.3 145); 
+    /* --vibrant-green: color(display-p3 0 1 0); */
+
+    background: var(--gray100);
+    font-family: system-ui,sans-serif;
+}
+body{
+    margin:0;
+}
+
+header{
+    background: var(--gray800);
+    color: white;
+    padding:1rem;
+    display: flex;
+    align-items: center;
+    gap:1rem;
+    h1{
+        margin:0;
+        font-variation-settings: "wght" 900, "wdth" 700;
+    }
+    .svg-check {
+        width: 21h;
+        height: 21h;
+        stroke: var(--brand);
+        }
+}
+.svg-check,
+.svg-plus{
+    fill:none;
+    stroke-width: 30;
+    stroke-linecap:round;
+    display: block;
+    pointer-events:none
+
+}
+
+.todo-form{
+    background: var(--gray600);
+    justify-content: center;
+    padding: 1rem;
+    display:flex;
+    gap:0.5rem;
+    align-items: stretch;
+    label{
+    flex: 1 0;
+    max-width: 40ch;
+    }
+    input{
+        background:var(--gray100);
+        width:100%;
+        border:0;
+        padding: 0.5rem;
+        box-shadow: inset 1px 1px 2px oklch(0% 0% 0 / 0.6);
+        border-radius:5px;
+        font:inherit;
+        font-size:2rem;
+        /* &:focus{
+            background: white;
+        } */
+    }
+    .svg-plus {
+        stroke:black;
+        width: 66%;
+    }  
+}
+    .button-add-todo{
+        background: var(--brand);
+        border-radius: 5px;
+        font:inherit;
+        font-size: 2rem;
+        font-weight: 900;
+        aspect-ratio: 1;
+        height:3.35rem;
+        display:inline-grid;
+        place-items: center;
+        line-height: 0;
+
+        &.shake {
+            rotate: 0deg;
+            transform-origin: bottom right;
+            animation: shake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+            }
+        &.added {
+            transform-origin: center center;
+            animation: added 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+            }
+            }
+            @keyframes shake {
+                50% {
+                    rotate: -12deg;
+                }
+            }    
+            @keyframes added {
+                50% {
+                rotate: 1turn;
+                translate: 0 50px;
+                }
+            }              
+.todo-list{
+    padding: 1rem;
+    list-style: none;
+    li{
+        background: white;
+        box-shadow: 1px 1px 2px oklch(0% 0% 0/0.2);
+        padding:0.5rem;
+        display: flex;  
+        align-items: center;
+        gap:0.5rem;
+        .button-complete{
+            order:-1;
+        }      
+        .svg-check{
+            opacity:0;
+            stroke:black;
+            position:absolute;
+            width:2rem;
+            height:2rem;
+            top:-0.5rem;
+            left:0.1rem;
+            opacity: 0;
+        }
+        &.complete{
+        .svg-check{
+            opacity: 1;
+            stroke-dasharray: 1;
+            stroke-dashoffset: 1;
+            animation:do-check 1s infinite alternate;
+        }
+    }
+    }
+}
+
+@keyframes do-check{
+    from{
+        stroke-dashoffset: 1;
+    }
+    to{
+        stroke-dashoffset: 0;
+    }
+}
+
+.button-complete{
+    border:0;
+    background: var(--gray100);
+    box-shadow: inset 1px 1px 2px oklch(0% 0% 0/0.2);
+    padding:0.25rem;
+    width:1.5rem;
+    height:1.5rem;
+    position:relative;
+}
+.screen-reader-text{
+    text-indent:-9999em;
+    width:0;
+    height:0;
+    display: block;
+}
