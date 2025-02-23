@@ -8,10 +8,10 @@
 </head>
 <body>
     <header>
-        <svg width="20" height="20" viewBox="0 0 240 260" class="svg-check site-logo ">
+        <svg width="20" height="20" viewBox="0 0 240 260" class="svg-check site-logo">
             <polyline class="cls-1" points="16 149 72 225 225 16" pathLength="1" />
         </svg>
-        <h1>To-DOs</h1>
+        <h1>ToDOs</h1>
     </header>
     <form id="todo-form" class="todo-form">
         <label>
@@ -28,6 +28,15 @@
         </button>
     </form>
     <ol id="todo-list" class="todo-list"></ol>
+
+    <footer>
+    <div class="todo-type-toggles">
+        <button aria-pressed="true">Active</button>
+        <button>Completed</button>
+    </div>
+    <div class="note">Double-click to edit a todo</div>
+    </footer>
+    
     <script type="text/javascript" src="script.js"></script>
 </body>
 </html>

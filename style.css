@@ -1,7 +1,4 @@
 *{
-    /* margin: 0;
-    padding: 0; */
-    border:none;
     box-sizing: border-box;
 }
 html {
@@ -40,6 +37,7 @@ header{
     fill:none;
     stroke-width: 30;
     stroke-linecap:round;
+    stroke-linejoin: round;
     display: block;
     pointer-events:none
 
@@ -65,9 +63,9 @@ header{
         border-radius:5px;
         font:inherit;
         font-size:2rem;
-        /* &:focus{
+        &:focus {
             background: white;
-        } */
+        }
     }
     .svg-plus {
         stroke:black;
@@ -75,16 +73,22 @@ header{
     }  
 }
     .button-add-todo{
-        background: var(--brand);
+        border:0;
         border-radius: 5px;
         font:inherit;
         font-size: 2rem;
         font-weight: 900;
+        background: var(--brand);
         aspect-ratio: 1;
         height:3.35rem;
         display:inline-grid;
         place-items: center;
         line-height: 0;
+
+        &:hover,
+        &:focus {
+            background:color-mix(in oklch, var(--brand) 100%, black 10%);
+        }
 
         &.shake {
             rotate: 0deg;
@@ -114,6 +118,7 @@ header{
         background: white;
         box-shadow: 1px 1px 2px oklch(0% 0% 0/0.2);
         padding:0.5rem;
+        margin-block-end: 0.5rem;
         display: flex;  
         align-items: center;
         gap:0.5rem;
@@ -121,7 +126,6 @@ header{
             order:-1;
         }      
         .svg-check{
-            opacity:0;
             stroke:black;
             position:absolute;
             width:2rem;
@@ -135,8 +139,31 @@ header{
             opacity: 1;
             stroke-dasharray: 1;
             stroke-dashoffset: 1;
+            /* https://css-tricks.com/a-trick-that-makes-drawing-svg-lines-way-easier/ */
             animation:do-check 1s infinite alternate;
         }
+    }
+    &.editing{
+        outline:1px solid var(--brand);
+
+        .text{
+            display: none;
+        }
+    }
+
+    &[data-complete="true"]{
+        .text{
+            text-decoration: line-through;
+            text-decoration-thickness:2px ;
+            text-decoration-color: var(--brand);
+            opacity:0.5;
+        }
+    }
+
+    &.empty{
+        justify-content: center;
+        background: none;
+        box-shadow: none;
     }
     }
 }
@@ -150,8 +177,22 @@ header{
     }
 }
 
+.form-edit {
+    width: 100%;
+}
+.input-edit {
+    font: inherit;
+    border: 0;
+    width: 100%;
+    padding: 0;
+    &:focus {
+        outline: none;
+    }
+}
+
 .button-complete{
     border:0;
+    border-radius: 3px;
     background: var(--gray100);
     box-shadow: inset 1px 1px 2px oklch(0% 0% 0/0.2);
     padding:0.25rem;
@@ -164,4 +205,49 @@ header{
     width:0;
     height:0;
     display: block;
+}
+
+footer {
+    font-size: 0.8rem;
+
+    >.note {
+        opacity: 0.5;
+    }
+
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+.todo-type-toggles {
+    display: flex;
+
+    button {
+        border: 0;
+        border-radius: 8px;
+        padding: 0.2rem 1rem;
+        background: var(--button-bg, white);
+        box-shadow: 1px 1px 3px oklch(0% 0% 0 / 0.2);
+        &[aria-pressed="true"] {
+            --button-bg: var(--brand);
+            box-shadow: 0 1px 1px oklch(0% 0% 0 / 0.4);
+        }
+        &:active {
+            position: relative;
+            top: 1px;
+        }
+        &:hover,
+        &:focus-visible {
+            background: color-mix(in oklch, var(--button-bg), black 10%);
+        }
+    }
+
+    button:first-child {
+        border-radius: 5px 0 0 5px;
+    }
+    button:last-child {
+        border-radius: 0 5px 5px 0;
+    }
 }
