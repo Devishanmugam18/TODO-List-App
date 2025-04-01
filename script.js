@@ -29,8 +29,10 @@ function buildUI(state) {
   let viewTODOs = [];
 
   if (state === states.COMPLETED) {
-    viewTODOs = TODOs.filter((todo) => todo.complete);
+    //if the state is completed, then filter out the completed tasks
+    viewTODOs = TODOs.filter((todo) => todo.complete); //
   } else {
+    //if the state is active, then filter out the active tasks
     viewTODOs = TODOs.filter((todo) => !todo.complete);
   }
 
@@ -43,7 +45,7 @@ function buildUI(state) {
     <span class="text">${todo.title}</span>
     <button aria-label="Complete" class="button-complete">
       <svg width="20" height="20" viewBox="0 0 241.44 259.83" class="svg-check">
-        <polyline pathLength="1" points="16.17 148.63 72.17 225.63 225.17 11.63"/>
+        <polyline pathLength="1" points="16.17 148.63 72.17 q225.63 225.17 11.63"/>
       </svg>  
     </button>
     </li>`;
@@ -142,20 +144,28 @@ function toggleTodo(event) {
   listItem.classList.toggle("complete");
   setTimeout(() => {
     if (listItem.dataset.complete === "true") {
-      TODOs = TODOs.filter((todo) => !todo.complete);
+      // remove the checked off item on completed tab
+      TODOs = TODOs.filter((todo) => todo.id != listItem.id);
+
+      //if the browser does not support view transition, then directly build the UI
       if (!document.startViewTransition) {
-        buildUI(states.COMPLETED);
+        buildUI(states.COMPLETED); //build the UI based on the state
       } else {
+        //if browser supports view transition, then start the transition
         document.startViewTransition(() => {
-          buildUI();
+          buildUI(); //build the UI
         });
       }
     } else {
+      // else block is executed if complete status is false for the task item
       TODOs.forEach((todo) => {
+        //iterate through the tasks
         if (todo.id === listItem.id) {
+          //mark the task as complete
           todo.complete = !todo.complete;
         }
       });
+      //
       if (!document.startViewTransition) {
         buildUI(states.ACTIVE);
       } else {

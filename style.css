@@ -85,10 +85,10 @@ header{
         place-items: center;
         line-height: 0;
 
-        &:hover,
+        /* &:hover,
         &:focus {
             background:color-mix(in oklch, var(--brand) 100%, black 10%);
-        }
+        } */
 
         &.shake {
             rotate: 0deg;
