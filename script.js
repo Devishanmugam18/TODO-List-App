@@ -45,7 +45,7 @@ function buildUI(state) {
     <span class="text">${todo.title}</span>
     <button aria-label="Complete" class="button-complete">
       <svg width="20" height="20" viewBox="0 0 241.44 259.83" class="svg-check">
-        <polyline pathLength="1" points="16.17 148.63 72.17 q225.63 225.17 11.63"/>
+        <polyline pathLength="1" points="16.17 148.63 72.17 225.63 225.17 11.63"/>
       </svg>  
     </button>
     </li>`;
